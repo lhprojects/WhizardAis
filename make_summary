@@ -1,0 +1,56 @@
+#!/bin/python3
+
+
+xpaths = []
+xx = []
+with open("x-section") as f:
+    lines = f.readlines()
+    for path, a in zip(lines[::2], lines[1::2]):
+        path = path[:-1]
+        a = a[:-1]
+        a = [x for x in a.split(' ') if len(x)>0]
+        x = a[1]
+        x = float(x)
+        xpaths.append(path)
+        xx.append(x)
+
+cpaths = []
+cc = []
+with open("stat") as f:
+    lines = f.readlines()
+    
+    i = 0    
+    while i < len(lines):
+        path = lines[i].strip()
+        i += 1
+        cpaths.append(path)
+
+        # events
+        if i >= len(lines):
+            a = "\n"
+        else:
+            a = lines[i]
+        
+        i += 1
+            
+        a = a[:-1]
+        a = [x for x in a.split(" ") if len(x) > 0]
+        if len(a) >= 1:
+            cc.append(float(a[0]))
+        else:
+            cc.append(0)
+
+
+assert len(cpaths) == len(xpaths)
+        
+with open("summary", "w") as f:
+    f.write("%20s %10s %10s %15s"%("process", "x-section", "gen.", "gen. lumi.\n"))
+    for proc, c in zip(cpaths, cc):
+        find=False
+        for i, path in enumerate(xpaths):
+            if path.find("P"+proc+".") >= 0:
+                find=True
+                f.write("%20s %10.2f %10d %15.2f\n"%(proc, xx[i], c, c/(1E-10+xx[i]) ))
+                break
+        if not find:
+            print("not found proc in xpath")

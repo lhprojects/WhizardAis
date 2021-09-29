@@ -1,0 +1,21 @@
+
+1.
+It's convienient for you to have copy of the scripts
+
+2.
+You need to use the container to setup enviroment of cluster6
+
+For example
+```
+source /PATH/to/container
+```bash
+
+NOTE: You should be able to access e.g. /besfs.
+But you can't access /cefs except the directory you are currently in and it's sub-directory.
+The compilation depends on some file in /cefs/higgs/liangh/... .
+So please source the /PATH/to/container in the directory like `/cefs/higgs`,
+so that you can acess your files and mines at the same time.
+
+3.
+Then you can use the remaining scripts following the moxin's guide, see README
+

@@ -1,0 +1,21 @@
+#!/bin/bash
+    
+    name=${1%%.*}
+    out_base=$3
+    E=$2
+    while read line
+	do
+		if [[ $line != *alias* && $line != \#* && $line != model* && $line != "" ]] 
+		then
+            proc=${line%% *}
+			procname=${proc%%0*}
+            
+		    for hprod in "X" "uu" "dd" "cc" "ss" "bb" "tt" "e1e1" "e2e2" "e3e3" "gg" "aa" "az" "zz" "ww"
+            do
+			    path=$out_base/$name/E$E.P${procname}_$hprod.e0.p0.whizard195/$proc*.stdhep
+			    echo ${procname}_$hprod
+                lcio_event_counter $path
+            done
+		fi
+	done<$1
+	

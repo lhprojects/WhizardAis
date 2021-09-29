@@ -1,0 +1,16 @@
+#!/bin/bash
+
+>  x-section
+for prc in ./2fermions ./4fermions ./higgs
+do
+    for ch in $prc/*
+    do
+        if [ -d $ch ]
+        then
+            echo $ch >> x-section
+            grep "sum" $ch/whizard.out >> x-section
+        fi
+    done
+
+done
+

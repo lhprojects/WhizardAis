@@ -1,0 +1,4 @@
+>stat
+source get-stat-proc 2fermions.prc 240 ./data >> stat
+source get-stat-proc 4fermions.prc 240 ./data >> stat
+source get-stat-higgs higgs.prc 240 ./data >> stat

@@ -1,0 +1,17 @@
+#!/bin/bash
+    
+    name=${1%%.*}
+    out_base=$3
+    E=$2
+    while read line
+	do
+		if [[ $line != *alias* && $line != \#* && $line != model* && $line != "" ]] 
+		then
+            proc=${line%% *}
+			echo $proc
+			procname=${proc%%0*}
+			path=$out_base/$name/E$E.P${procname}.e0.p0.whizard195/$proc*.stdhep
+            lcio_event_counter $path
+		fi
+	done<$1
+	

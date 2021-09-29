@@ -1,0 +1,5 @@
+#!/bin/bash
+echo $PWD
+cd /cefs/
+/cvmfs/container.ihep.ac.cn/bin/hep_container shell SL6 -g physics
+#/cvmfs/container.ihep.ac.cn/bin/hep_container shell SL6 -g bes
