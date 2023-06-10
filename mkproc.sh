@@ -5,7 +5,6 @@
 #MOXIN_BESFS=/besfs/groups.orig/higgs/users/moxin
 export topdir=$PWD
 export softdir=/cefs/higgs/liangh/software3/whizard_deps/
-#export GCCPATH=/afs/ihep.ac.cn/soft/common/gcc/gcc-4.6.2
 export GCCPATH=/cefs/higgs/liangh/software3/whizard_deps/gcc-4.6.2_install
 export PATH_TO_GFORTRAN=${GCCPATH}/bin
 
@@ -21,34 +20,40 @@ export CERN_LEVEL=2005
 export CERN_ROOT=${CERN}/${CERN_LEVEL}
 export CVSCOSRC=${CERN}/${CERN_LEVEL}/src
 
-export HEPMC_DIR=/cefs/higgs/liangh/software3/whizard/test2/HepMC2
-export OCAML_DIR=/afs/ihep.ac.cn/users/j/jxwang/big_home/generator/ocaml_3.11.2
-#export STDHEP_DIR=/besfs5/users/manqi/Software/Generator/stdhep-5-06-01/lib
-export STDHEP_DIR=/cefs/higgs/liangh/software3/whizard/test2/lib
+export COPIED_LIBS=/cefs/higgs/liangh/software3/whizard_deps/copied_libs
+export HEPMC_DIR=/cefs/higgs/liangh/software3/whizard_deps/HepMC2
+export OCAML_DIR=/cefs/higgs/liangh/software3/whizard_deps/ocaml-3.12.1-install
+export STDHEP_DIR=$COPIED_LIBS
 export TAUOLALIB=/workfs2/bes/lig/higgs/generator/tauola/tauola_desy/TAUOLA/tauola
 export PHOTOSLIB=/workfs2/bes/lig/higgs/generator/tauola/tauola_desy/TAUOLA/photos
-# export TAUOLALIB=/cefs/higgs/yudongw/Generator/whizard-1.95/lib
-# export PHOTOSLIB=/cefs/higgs/yudongw/Generator/whizard-1.95/lib
+
+
+for dir in $CERN $CERN_ROOT $HEPMC_DIR $OCAML_DIR $STDHEP_DIR $TAUOLALIB $PHOTOSLIB $COPIED_LIBS
+do
+    echo $dir
+    ls $dir
+done
 
 export PATH=${OCAML_DIR}/bin:${GCCPATH}/bin:${PATH_TO_GFORTRAN}:${CERN_ROOT}/bin:${PATH}
-#export LD_LIBRARY_PATH=$TAUOLALIB:${OCAML_DIR}/lib/ocaml:${GCCPATH}/lib64:${GCCPATH}/lib:/afs/ihep.ac.cn/soft/common/gcc/gmp/lib:/afs/ihep.ac.cn/soft/common/gcc/mpfr/lib:/afs/ihep.ac.cn/soft/common/gcc/mpc/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/cefs/higgs/liangh/software3/whizard/test2/lib:${OCAML_DIR}/lib/ocaml:${GCCPATH}/lib64:${GCCPATH}/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$COPIED_LIBS:${OCAML_DIR}/lib/ocaml:${GCCPATH}/lib64:${GCCPATH}/lib:$LD_LIBRARY_PATH
 
+echo "uzip file"
 cd ${topdir}
 mkdir -p whizard-1.95
 tar -xzvf ${softdir}/whizard-1.95-lc.tar.gz -C ${topdir}/whizard-1.95
 cd  whizard-1.95
 
+
+echo ./configure --enable-pythia --enable-stdhep --enable-chep --enable-mad --enable-omega \
+    USERLIBS="$(pwd)/a6f/include/pytaud.o $(pwd)/a6f/lib/libinclude.a $TAUOLALIB/libtauola.a $PHOTOSLIB/libphotos.a"
+
 ./configure --enable-pythia --enable-stdhep --enable-chep --enable-mad --enable-omega \
 	USERLIBS="$(pwd)/a6f/include/pytaud.o $(pwd)/a6f/lib/libinclude.a $TAUOLALIB/libtauola.a $PHOTOSLIB/libphotos.a"
 	
-#USERLIBS="/cefs/higgs/liangh/software3/whizard/test2/lib/libpythia6.a $(pwd)/a6f/include/pytaud.o $(pwd)/a6f/lib/libinclude.a $TAUOLALIB/libtauola.a $PHOTOSLIB/libphotos.a"
-
-    
 make libs
 make -C a6f/include/ A6F=.. WHIZ=../.. WH195=../.. SHELL=/bin/bash
 
-echo "Installation completed"
+echo "make completed"
 
 
 workspace=$topdir"/"
