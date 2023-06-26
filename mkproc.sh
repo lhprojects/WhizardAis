@@ -132,11 +132,12 @@ do
 	if [[ $line != *alias* && $line != \#* && $line != model* && $line != "" ]] 
 	then
 		proc=${line%% *}
-		for hprod in "X" "uu" "dd" "cc" "ss" "bb" "tt" "e1e1" "e2e2" "e3e3" "gg" "aa" "az" "zz" "ww"
+		for hprod in "gg" "bb" "cc" "uu" "dd" "ss"
 		do
 			if [ ! -d $workspace${name}/E$2.P${proc}_${hprod}.e0.p0.whizard195 ]
 			then
 				cp ${whizard}results "$workspace${name}/E$2.P${proc}_${hprod}.e0.p0.whizard195" -rf
+				printf "process higgs\n" >  "$workspace${name}/E$2.P${proc}_${hprod}.e0.p0.whizard195/whizard.cut1"
 			fi
 			cp mkhin.sh $workspace${name}/E$2.P${proc}_${hprod}.e0.p0.whizard195 -f
 			cd $workspace${name}/E$2.P${proc}_${hprod}.e0.p0.whizard195
