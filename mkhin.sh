@@ -35,9 +35,9 @@ filepath=$out_dir"${proc}_${hprod}.${epol}.${ppol}"
 proc_input=" &process_input\n
  process_id = \"${proc}\"\n
  sqrts = ${sqrts}\n
- luminosity = 5600\n
- polarized_beams = T\n
- structured_beams = T\n
+ luminosity = 1000\n
+ polarized_beams = F\n
+ structured_beams = F\n
  beam_recoil = T\n
 ! directory =\n
  /\n
@@ -56,7 +56,7 @@ int_input=" &integration_input\n
 /\n
 "
 sim_input=" &simulation_input\n
- n_events = 100000\n
+ n_events = 1000000\n
  write_events_raw = F\n
  keep_beam_remnants = T\n
  fragment = T\n
@@ -66,8 +66,8 @@ sim_input=" &simulation_input\n
   write_events_format = 20\n
   write_events_file = \"${filepath}\"\n
 ! bytes_per_file = 500000000\n
- events_per_file = 2000\n
- max_file_count = 10000\n
+ events_per_file = 1000\n
+ max_file_count = 1000\n
 \n
 "
 #py_para=" pythia_parameters = \"PMAS(25,1)=125.0; PMAS(25,2)=0.0043; MDME(174,1)=0; MDME(175,1)=0; MDME(176,1)=0; MDME(177,1)=0; MDME(178,1)=0; MDME(179,1)=0; MDME(182,1)=0; MDME(183,1)=0; MDME(184,1)=0; MDME(185,1)=0; MDME(186,1)=0; MDME(187,1)=0; MDME(210,1)=0; MDME(211,1)=0; MDME(212,1)=0; MDME(213,1)=0; MDME(214,1)=0; MDME(215,1)=0; MDME(216,1)=0; MDME(217,1)=0; MDME(218,1)=0; MDME(219,1)=0; MDME(220,1)=0; MDME(221,1)=0; MDME(222,1)=0; MDME(223,1)=0; MDME(224,1)=0; MDME(225,1)=0; MDME(226,1)=0; MSTJ(41)=2; MSTU(22)=20; PARJ(21)=0.40000; PARJ(41)=0.11000; PARJ(42)=0.52000; PARJ(81)=0.25000; PARJ(82)=1.90000; PARJ(54)=-0.03100; PARJ(55)=-0.00200; PARJ(1)=0.08500; PARJ(3)=0.45000; PARJ(4)=0.02500; PARJ(2)=0.31000; PARJ(11)=0.60000; PARJ(12)=0.40000; PARJ(13)=0.72000; PARJ(14)=0.43000; PARJ(15)=0.08000; PARJ(16)=0.08000; PARJ(17)=0.17000; MSTP(3)=1; MWID(25)=2\"\n
@@ -75,7 +75,7 @@ sim_input=" &simulation_input\n
 #!pythia_parameters = \"BRAT(222)=0.0856;BRAT(223)=0.0023;BRAT(224)=0.00155;BRAT(225)=0.0267;\"\n
 #!pythia_parameters = \"BRAT(226)=0.216;\"\n
 #/\n"
-py_para=" pythia_parameters = \"PMAS(25,1)=125.0; PMAS(25,2)=0.3605E-02;\n
+py_para=" pythia_parameters = \"PMAS(25,1)=124.998; PMAS(25,2)=0.3605E-02;\n
   MSTJ(41)=2; MSTU(22)=20; MSTJ(28)=2;\n
   PARJ(21)=0.40000; PARJ(41)=0.11000; PARJ(42)=0.52000; PARJ(81)=0.25000;\n
   PARJ(82)=1.90000; MSTJ(11)=3; PARJ(54)=-0.03100; PARJ(55)=-0.00200;\n
@@ -213,18 +213,18 @@ para_input=" &parameter_input\n
  Ms   = 0\n
  Mc   = 0\n
  Mb   = 0\n
- MH   = 125\n
+ MH   = 124.998\n
  wH   = 0.0043\n
  alphas = 1.e-6\n
 /
 \n
 "
 beam_e_input=" &beam_input\n
- particle_name = 'e1'\n
+ particle_name = 'e2'\n
  polarization = ${str_epol}\n 
  USER_spectrum_on = F\n
  USER_spectrum_mode = 22\n
- ISR_on = T\n
+ ISR_on = F\n
  ISR_alpha = 0.0072993\n
  ISR_m_in = 0.000511\n
  EPA_on = F\n
@@ -236,11 +236,11 @@ beam_e_input=" &beam_input\n
 "
 
 beam_p_input=" &beam_input\n
- particle_name = 'E1'\n
+ particle_name = 'E2'\n
  polarization = ${str_ppol}\n
  USER_spectrum_on = F\n
  USER_spectrum_mode = 22\n
- ISR_on = T\n
+ ISR_on = F\n
  ISR_alpha = 0.0072993\n
  ISR_m_in = 0.000511\n
  EPA_on = F\n
