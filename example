@@ -1,13 +1,13 @@
 mkdir -p data
 
-rm -rf 2fermions
-rm -rf whizard-1.95 
-source mkproc.sh -p 2fermions.prc 240 $PWD/data
+#rm -rf 2fermions
+#rm -rf whizard-1.95 
+#source mkproc.sh -p 2fermions.prc 240 $PWD/data
 
 #rm -rf 4fermions
 #rm -rf whizard-1.95 
 #source mkproc.sh -p 4fermions.prc 240 $PWD/data
 
-#rm -rf higgs
-#rm -rf whizard-1.95 
-#source mkproc.sh -h higgs.prc 240 $PWD/data
+rm -rf higgs
+rm -rf whizard-1.95 
+source mkproc.sh -h higgs.prc 240 $PWD/data
