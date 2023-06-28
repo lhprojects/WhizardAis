@@ -1,19 +1,39 @@
-stdhep folder: ./data
+#######################################################
+#
+# Generator for the CEPC with Whizard 1.95
+#
+#######################################################
 
-lminosity: 5600 fb^-1 for higgs and 4fermisons
-           56   fb^-1 for 2fermions
-           at least 100000 events generated for each channel
-           NOTE: each channel has its unique name pattern,
-           two or more channels may share the same data folder
+The mkproc.sh script is used to make the steering files
+for all the processes defined in the input prc file. Four
+parameters have to be send to mkproc.sh:
 
-actual generated events:
-    see ./stat
-    in ./stat
-        files: number of files
-        events: number of events
-        N/Lumi.: number of events / luminsoity
-            should can compared this value with the x-section
-            if the expected number of events > 100000, this value should be quite close to the x-section
-x-section:
+1) The pattern mkproc.sh works with:
+-p make all the SM backgrounds
+-h make the Higgs processes
+-a make di-photon backgrounds
 
-                
+2) The prc file in which the required processes defined
+there are several well defined prc files in the directory:
+2fermions.prc for the 2 fermions SM backgrounds,
+4fermions.prc for the 4 fermions SM backgrounds,
+6fermions.prc for the 6 fermions SM backgrounds, including
+                  the t-tbar processes, specific to 350GeV,
+higgs.prc     for the higgs production, classified according
+                  to the decay products of higgs,
+gamma.prc     for the di-photon backgrounds, needs tuning.
+
+3) The center of mass energy. Be aware that the 6fermions.prc
+   is programed only under 350GeV case.
+
+4) The directory where you want the samples located
+
+The gramma is "source mkproc.sh -pattern XXX.prc cms path". After it
+completed, all the steering files will be created under the current
+location, and classified according to the processes defined in the prc
+file. The samples will be generated under the location specified by the
+parameter path.
+
+For the users who want to generate samples with specific models, first
+the model name in the prc should be changed to the new one, and the
+model file has to be installed at $whizard_dir/conf/models/.
